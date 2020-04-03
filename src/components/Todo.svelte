@@ -1,30 +1,19 @@
 <script>
+  import { todos } from '../store';
   export let todo;
 
-  function onDelete(id) {
-    deleteTodo(id);
+  function onDelete() {
+    todos.delete(todo.id);
   }
 
-  async function deleteTodo(id){
-    await fetch('/.netlify/functions/delete-todo', {
-      method: 'post',
-      body: JSON.stringify({ id: id }),
-    });
-  }
-
-  function onUpdate() {
-    todo.completed = !todo.completed;
-    updateTodo(todo);
-  }
-
-  async function updateTodo() {
-    await fetch('/.netlify/functions/update-todo', {
-      method: 'post',
-      body: JSON.stringify(todo),
-    });
+  function onUpdate(event) {
+    // manually setting this opposed to two way binding
+    // due to syncing issues between the property andd the visual
+    todo.completed = event.target.checked;
+    todos.update(todo);
   }
 </script>
 
 {todo.title}
-<input type="checkbox" bind:checked={todo.completed} on:click|preventDefault={onUpdate} />
-<button on:click={onDelete(todo.id)}>delete</button>
+<input type="checkbox" checked={todo.completed} on:click={onUpdate} />
+<button on:click={onDelete}>delete</button>

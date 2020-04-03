@@ -1,25 +1,31 @@
 <script>
   import { onMount } from 'svelte';
   import Todo from './components/Todo.svelte';
-  let todos =[];
+  import { todos } from './store';
 
-  onMount(async () => {
+  let title = '';
+
+  onMount(async () =>{
     const res = await fetch('/.netlify/functions/get-todos');
-    todos = await res.json();
+    const todosList = await res.json();
+
+    todos.set(todosList);
   });
 
-  
+  function addTodo(){
+    todos.add(title);
+  }
 </script>
 
 <main>
-  <form action="/.netlify/functions/add-todo" method="POST">
+  <form>
     <label for="title">Todo title</label>
-    <input type="text" name="title" required />
-    <button type="submit">save</button>
+    <input type="text" name="title" bind:value={title} />
+    <button type="submit" on:click|preventDefault={addTodo}>save</button>
   </form>
 
   <ul>
-    {#each todos as todo}
+    {#each $todos as todo}
       <li>
         <Todo todo={todo} ></Todo>
       </li>

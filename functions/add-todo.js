@@ -1,5 +1,4 @@
 const graphql = require('./util/graphql');
-const querystring = require('querystring');
 
 exports.handler = async (event) => {
   try {
@@ -7,7 +6,7 @@ exports.handler = async (event) => {
       return { statusCode: 405, body: 'Method not allowed' };
     }
 
-    const { title } = querystring.parse(event.body);
+    const { title } = JSON.parse(event.body);
 
     const ADD_TODO = `
       mutation($title: String!) {
@@ -15,20 +14,18 @@ exports.handler = async (event) => {
           title: $title
           completed: false
         }) {
+          id: _id
           title
           completed
         }
       }
     `;
 
-    await graphql(ADD_TODO,{ title });
+    const newTodo = await graphql(ADD_TODO,{ title });
 
     return {
-      statusCode: 302,
-      headers: {
-        Location: '/',
-      },
-      body: 'created...',
+      statusCode: 201,
+      body: JSON.stringify(newTodo.createTodo),
     };
 
   } catch (error) {

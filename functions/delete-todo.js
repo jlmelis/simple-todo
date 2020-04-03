@@ -11,16 +11,16 @@ exports.handler = async (event) => {
     const DELETE_TODO = `
       mutation ($id: ID!){
         deleteTodo(id: $id){
-          _id
+          id: _id
         }
       }
     `;
 
-    await grapqhl(DELETE_TODO, { id });
+    const deletedId = await grapqhl(DELETE_TODO, { id });
 
     return {
       statusCode: 200,
-      body: '',
+      body: JSON.stringify(deletedId.deleteTodo),
     };
 
   } catch (error) {
