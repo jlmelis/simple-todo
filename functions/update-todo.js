@@ -1,6 +1,6 @@
-const graphql = require('./util/graphql');
+import graphql from './util/graphql';
 
-exports.handler = async (event) => {
+export async function handler(event) {
   try {
     if (event.httpMethod !== 'POST') {
       return { statusCode: 405, body: 'Method not allowed' };
@@ -32,4 +32,4 @@ exports.handler = async (event) => {
       body: JSON.stringify(error.message),
     };
   }
-};
+}

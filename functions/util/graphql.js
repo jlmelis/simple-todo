@@ -1,7 +1,7 @@
 //folowwing code from https://github.com/jlengstorf/dynamic-jamstack-examples
-const axios = require('axios');
+import axios from 'axios';
 
-module.exports = async (query, variables = {}) => {
+export default async function(query, variables = {}) {
   return axios
     .post(
       'https://graphql.fauna.com/graphql',
@@ -19,5 +19,5 @@ module.exports = async (query, variables = {}) => {
     .catch(error => {
       console.log(error);
     });
-};
+}
   

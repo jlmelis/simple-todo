@@ -1,6 +1,6 @@
-const graphql = require('./util/graphql');
+import graphql from './util/graphql';
 
-exports.handler = async () => {
+export async function handler() {
   const { todos } = await graphql(`
     query {
       todos {
@@ -17,4 +17,4 @@ exports.handler = async () => {
     statusCode: 200,
     body: JSON.stringify(todos.data),
   };
-};
+}
