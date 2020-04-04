@@ -1,23 +1,28 @@
 //folowwing code from https://github.com/jlengstorf/dynamic-jamstack-examples
-import axios from 'axios';
+import ApolloClient from 'apollo-boost';
+import fetch from 'node-fetch';
 
-export default async function(query, variables = {}) {
-  return axios
-    .post(
-      'https://graphql.fauna.com/graphql',
-      {
-        query: query,
-        variables,
+const client = new ApolloClient({
+  uri: 'https://graphql.fauna.com/graphql',
+  fetch,
+  request: operation => {
+    operation.setContext({
+      headers: {
+        authorization: `Bearer ${process.env.FAUNADB_SERVER_SECRET}`,
       },
-      {
-        headers: {
-          authorization: `Bearer ${process.env.FAUNADB_SERVER_SECRET}`,
-        },
-      },
-    )
-    .then(response => response.data.data)
-    .catch(error => {
-      console.log(error);
     });
+  },
+});
+
+export async function query(query, variables = {}) {
+  const results = await client.query({ query: query, variables: variables });
+  
+  return (results.data);
+}
+
+export async function mutate(mutation, variables = {}) {
+  const results = await client.mutate({ mutation: mutation, variables: variables });
+  
+  return (results.data);
 }
   

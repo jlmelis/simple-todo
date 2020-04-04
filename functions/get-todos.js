@@ -1,7 +1,8 @@
-import graphql from './util/graphql';
+import { query } from './util/graphql';
+import { gql } from 'apollo-boost';
 
 export async function handler() {
-  const { todos } = await graphql(`
+  const { todos } = await query(gql`
     query {
       todos {
         data {

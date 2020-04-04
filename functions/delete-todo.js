@@ -1,4 +1,5 @@
-import grapqhl from './util/graphql';
+import { mutate } from './util/graphql';
+import { gql } from 'apollo-boost';
 
 export async function handler(event) {
   try {
@@ -8,7 +9,7 @@ export async function handler(event) {
     
     const { id } = JSON.parse(event.body);
 
-    const DELETE_TODO = `
+    const DELETE_TODO = gql`
       mutation ($id: ID!){
         deleteTodo(id: $id){
           id: _id
@@ -16,7 +17,7 @@ export async function handler(event) {
       }
     `;
 
-    const deletedId = await grapqhl(DELETE_TODO, { id });
+    const deletedId = await mutate(DELETE_TODO, { id });
 
     return {
       statusCode: 200,

@@ -23,7 +23,9 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "apollo-boost": "^0.4.7",
+    "graphql": "^15.0.0",
+    "node-fetch": "^2.6.0",
     "sirv-cli": "^0.4.4"
   }
 }

@@ -1,4 +1,5 @@
-import graphql from './util/graphql';
+import { mutate } from './util/graphql';
+import { gql } from 'apollo-boost';
 
 export async function handler(event) {
   try {
@@ -8,7 +9,7 @@ export async function handler(event) {
 
     const { title } = JSON.parse(event.body);
 
-    const ADD_TODO = `
+    const ADD_TODO = gql`
       mutation($title: String!) {
         createTodo(data: {
           title: $title
@@ -21,7 +22,7 @@ export async function handler(event) {
       }
     `;
 
-    const newTodo = await graphql(ADD_TODO,{ title });
+    const newTodo = await mutate(ADD_TODO,{ title });
 
     return {
       statusCode: 201,
