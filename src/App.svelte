@@ -12,17 +12,23 @@
     todos.set(todosList);
   });
 
-  function addTodo(){
-    todos.add(title);
+  function addTodo(event){
+    if (event.which === 13){
+      todos.add(title);
+      title = '';
+    }
   }
 </script>
 
 <main>
-  <form>
-    <label for="title">Todo title</label>
-    <input type="text" name="title" bind:value={title} />
-    <button type="submit" on:click|preventDefault={addTodo}>save</button>
-  </form>
+  <section class="section">
+    <h1 class="title">Todos</h1>
+    <input class="input is-primary" type="text" 
+      placeholder="Add todo"
+      name="title" bind:value={title} on:keydown={addTodo}
+      autofocus />
+  </section>
+  
 
   <ul>
     {#each $todos as todo}
