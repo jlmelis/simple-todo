@@ -2,7 +2,8 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm-run-all --parallel build:**",
+    "build:app": "rollup -c",
     "build:functions": "netlify-lambda build functions",
     "dev": "rollup -c -w",
     "start": "sirv public",
