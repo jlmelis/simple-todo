@@ -20,24 +20,21 @@
   }
 </script>
 
-<main>
-  <section class="section">
-    <h1 class="title">Todos</h1>
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">Todos</h1>
     <input class="input is-primary" type="text" 
       placeholder="Add todo"
-      name="title" bind:value={title} on:keydown={addTodo}
-      autofocus />
-  </section>
-  
-
-  <ul>
-    {#each $todos as todo}
-      <li>
-        <Todo todo={todo} ></Todo>
-      </li>
-    {/each}
-  </ul>
-</main>
+      name="title" bind:value={title} on:keydown={addTodo} />
+    <ul>
+      {#each $todos as todo}
+        <li>
+          <Todo todo={todo} ></Todo>
+        </li>
+      {/each}
+    </ul>
+  </div>
+</section>
 
 <style>
 	main {
