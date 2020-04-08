@@ -15,7 +15,11 @@ const client = new ApolloClient({
 });
 
 export async function query(query, variables = {}) {
-  const results = await client.query({ query: query, variables: variables });
+  const results = await client.query({
+    query: query,
+    variables: variables,
+    fetchPolicy: 'network-only',
+    });
   
   return (results.data);
 }
