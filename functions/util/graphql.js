@@ -19,7 +19,7 @@ export async function query(query, variables = {}) {
     query: query,
     variables: variables,
     fetchPolicy: 'network-only',
-    });
+  });
   
   return (results.data);
 }
