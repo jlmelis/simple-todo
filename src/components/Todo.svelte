@@ -15,7 +15,7 @@
 <div class="level is-mobile">
   <div class="level-left">
     <div class="level-item">
-      <button class="button is-small" class:is-success={todo.completed} on:click={onUpdate}>
+      <button class="button is-size-5-desktop is-size-7-mobile" class:is-success={todo.completed} on:click={onUpdate}>
         <i class="iconify" 
             data-icon="icomoon-free:checkmark2" 
             data-inline="false"></i>
@@ -27,7 +27,7 @@
   </div>
   <div class="level-right">
     <div class="level-item" >
-      <button class="button is-small" on:click={onDelete}>
+      <button class="button is-size-5-desktop is-size-7-mobile" on:click={onDelete}>
         <i class="iconify icon-bin" 
           data-icon="icomoon-free:bin" 
           data-inline="false"></i>
