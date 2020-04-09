@@ -15,7 +15,8 @@
 <div class="level is-mobile">
   <div class="level-left">
     <div class="level-item">
-      <button class="button is-size-5-desktop is-size-7-mobile" class:is-success={todo.completed} on:click={onUpdate}>
+      <button class="button is-size-5-desktop is-size-7-mobile" 
+        class:is-success={todo.completed} on:click={onUpdate}>
         <i class="iconify" 
             data-icon="icomoon-free:checkmark2" 
             data-inline="false"></i>
