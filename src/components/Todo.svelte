@@ -12,7 +12,7 @@
   }
 </script>
 
-<div class="level is-mobile">
+<div class="level is-mobile todo">
   <div class="level-left">
     <div class="level-item">
       <button class="button is-size-5-desktop is-size-7-mobile" 
@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="level-item">
-    <span class:completed={todo.completed}>{todo.title}</span>
+    <span class="todo-title" class:completed={todo.completed}>{todo.title}</span>
   </div>
   <div class="level-right">
     <div class="level-item" >

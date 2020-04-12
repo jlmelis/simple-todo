@@ -9,7 +9,7 @@ module.exports = {
         node: true,
     },
     plugins: ['svelte3'],
-    extends: ['eslint:recommended'],
+    extends: ['eslint:recommended', 'plugin:cypress/recommended'],
     overrides: [
         {
             files: ['**/*.svelte'],

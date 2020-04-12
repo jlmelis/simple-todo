@@ -23,7 +23,7 @@
 <section class="section">
   <div class="container">
     <h1 class="title has-text-centered">Todos</h1>
-    <input class="input is-primary" type="text" 
+    <input id="add-todo" class="input is-primary" type="text" 
       placeholder="Add todo"
       name="title" bind:value={title} on:keydown={addTodo} />
     <ul>
