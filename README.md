@@ -1,5 +1,5 @@
 ## Simple Todo
-  This main purpose of this app is to provide a playground for me to test things I am incorporating in a different project. This is a "learing app" and is not meant to represent a finished product. The code here could be in various states of refactoring so it may not adhere to best practices. 
+The main purpose of this app is to provide a playground for me to test things I am incorporating in a different project. This is a "learing app" and is not meant to represent a finished product. The code here could be in various states of refactoring so it may not adhere to best practices (read: the code may be ugly). 
   
 
 ## Technology used
