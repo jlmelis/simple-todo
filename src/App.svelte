@@ -1,22 +1,49 @@
 <script>
   import { onMount } from 'svelte';
   import Todo from './components/Todo.svelte';
-  import { todos } from './store';
+  import api from './util/api.js';
 
   let title = '';
+  let todos = [];
 
   onMount(async () =>{
-    const res = await fetch('/.netlify/functions/get-todos');
-    const todosList = await res.json();
-
-    todos.set(todosList);
+    todos = await api.getAll();
   });
 
-  function addTodo(event){
+  async function addTodo(event){
     if (event.which === 13){
-      todos.add(title);
+      const optimisticTodo = { title: title };
+
+      // optimistic add
+      todos = [...todos, optimisticTodo];
       title = '';
+      // try to save
+      try {
+        const newTodo = await api.addTodo(optimisticTodo.title);
+        
+        // replace optimistic todo with real todo
+        todos = todos.map(t => t === optimisticTodo ? newTodo : t);
+        console.log(todos);
+      } catch (error) {
+        // TODO: handle failure for the optimistic todo
+        console.log(error);
+      }
     }
+  }
+
+  async function deleteTodo(event) {
+    // optimistically delete
+    todos = todos.filter(t => t.id !== event.detail.id);
+    try {
+      api.deleteTodo(event.detail.id);
+    } catch (error) {
+      // TODO: handle failures
+      console.log(error);
+    }
+  }
+
+  async function updateTodo(event) {
+    api.updateTodo(event.detail.todo);
   }
 </script>
 
@@ -27,9 +54,9 @@
       placeholder="Add todo"
       name="title" bind:value={title} on:keydown={addTodo} />
     <ul>
-      {#each $todos as todo}
+      {#each todos as todo}
         <li>
-          <Todo todo={todo} ></Todo>
+          <Todo todo={todo} on:delete={deleteTodo} on:update={updateTodo} ></Todo>
         </li>
       {/each}
     </ul>

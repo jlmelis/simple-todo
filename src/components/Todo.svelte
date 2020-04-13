@@ -1,14 +1,17 @@
 <script>
-  import { todos } from '../store';
+  import { createEventDispatcher } from 'svelte';
+  
   export let todo;
   
+  const dispatch = createEventDispatcher();
+
   function onDelete() {
-    todos.delete(todo.id);
+    dispatch('delete', { id: todo.id });
   }
 
   function onUpdate() {
     todo.completed = !todo.completed;
-    todos.update(todo);
+    dispatch('update', { todo: todo });
   }
 </script>
 
