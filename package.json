@@ -29,7 +29,7 @@
     "apollo-boost": "^0.4.7",
     "encoding": "^0.1.12",
     "graphql": "^15.0.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "sirv-cli": "^0.4.4"
   }
 }
